@@ -57,16 +57,7 @@ class App extends Component {
     );
   }
   render() {
-    // return (
-    //   <div>
-    //     Latitude: {this.state.lat}
-    //     <br />
-    //     Longtitude: {this.state.long}
-    //     <br />
-    //     Error: {this.state.errorMessage}
-    //     <br />
-    //   </div>
-    // );
+    // Conditional Rendering
     if (this.state.errorMessage && (!this.state.lat && !this.state.long)) {
       return(
         <div>
