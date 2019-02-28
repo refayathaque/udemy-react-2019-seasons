@@ -23,9 +23,12 @@ import ReactDOM from 'react-dom';
 //   </div>
 // )
 
+// Component Lifecycle functions are functions we can optionally (render is not optional) define in our class-based components
+// constructor, render, componentDidMount, componentDidUpdate, componentWillUnmount
+
 // Class-Based Component
 class App extends Component {
-  // Any time an instance of the class is created the constructor function is the first function that will be called
+  // Any time an instance of the class is created the constructor function is the first function that will be automatically called
   constructor(props) {
     // State must be initialized when a component is created, and that can be done here in the constructor function
     super(props); // Ensures that the React.Component's 'constructor' function, with all of it's necessary configuration, gets called
@@ -55,6 +58,15 @@ class App extends Component {
         console.log(err)
       }
     );
+  }
+  componentDidMount() {
+    // This lifecycle function will be automatically called once, when our component first gets rendered on to the screen
+    console.log('My component was rendered to the screen');
+  }
+  componentDidUpdate() {
+    // This lifecycle function will be automatically called when the component updates itself and re-renders because we called `setState`
+    // Will get called every time the component gets updated
+    console.log('My component was just updated - it re-rendered!');
   }
   render() {
     // Conditional Rendering
