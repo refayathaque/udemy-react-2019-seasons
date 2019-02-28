@@ -33,7 +33,7 @@ class App extends Component {
     // State must be initialized when a component is created, and that can be done here in the constructor function
     super(props); // Ensures that the React.Component's 'constructor' function, with all of it's necessary configuration, gets called
     // ^ Necessary, or else, you will get an error
-    // This (below) is the only time we do a direct assignment to `this.state`, we are initializing state here
+    // This (below) is the only time we do a direct assignment to `this.state`, since we are initializing state here
     this.state = {
       lat: null,
       long: null,
