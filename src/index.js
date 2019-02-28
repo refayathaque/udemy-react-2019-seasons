@@ -15,6 +15,14 @@ import ReactDOM from 'react-dom';
 //   );
 // };
 
+// Anytime you go from a single line JSX state to a multiline JSX statement make sure you get rid of the ; after the closing div tag
+// return <div>helloWorld</div>;
+// return(
+//   <div>
+//     hellWorld
+//   </div>
+// )
+
 // Class-Based Component
 class App extends Component {
   // Any time an instance of the class is created the constructor function is the first function that will be called
@@ -25,8 +33,9 @@ class App extends Component {
     // This (below) is the only time we do a direct assignment to `this.state`, we are initializing state here
     this.state = {
       lat: null,
-      long: null
-    };
+      long: null,
+      errorMessage: ''
+    }
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         // State can only be updated using the function 'setState'
@@ -38,17 +47,49 @@ class App extends Component {
         console.log(position)
         // Updating 'state' on a component causes the component to (almost) instantly rerender the component
       },
-      (err) => console.log(err)
+      (err) => {
+        this.setState({
+          errorMessage: err.message
+        })
+        // Updating 'state' is an additive process, ^ won't affect `this.state.lon` or `this.state.lat`
+        console.log(err)
+      }
     );
   }
   render() {
-    return (
+    // return (
+    //   <div>
+    //     Latitude: {this.state.lat}
+    //     <br />
+    //     Longtitude: {this.state.long}
+    //     <br />
+    //     Error: {this.state.errorMessage}
+    //     <br />
+    //   </div>
+    // );
+    if (this.state.errorMessage && (!this.state.lat && !this.state.long)) {
+      return(
+        <div>
+          Error: {this.state.errorMessage}
+        </div>
+      );
+    }
+    if (!this.state.errorMessage && (this.state.lat && this.state.long)) {
+      return(
+        <div>
+          Latitude: {this.state.lat}
+          <br />
+          Longtitude: {this.state.long}
+          <br />
+        </div>
+      );
+    }
+    return(
       <div>
-        <p>Latitude: {this.state.lat}</p>
-        <p>Longtitude: {this.state.long}</p>
+        Loading!
       </div>
-    );
-  };
-};
+    )
+  }
+}
 
 ReactDOM.render(<App />, document.querySelector('#root'));
