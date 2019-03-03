@@ -39,26 +39,9 @@ class App extends Component {
       long: null,
       errorMessage: ''
     }
-    window.navigator.geolocation.getCurrentPosition(
-      (position) => {
-        // State can only be updated using the function 'setState'
-        // And we NEVER want to do a direct assignment to a state object, e.g., `this.state.lat = position.coords.latitude`, unless we are initializing the state inside the constructor function
-        this.setState({
-          lat: position.coords.latitude,
-          long: position.coords.longitude
-        });
-        console.log(position)
-        // Updating 'state' on a component causes the component to (almost) instantly rerender the component
-      },
-      (err) => {
-        this.setState({
-          errorMessage: err.message
-        })
-        // Updating 'state' is an additive process, ^ won't affect `this.state.lon` or `this.state.lat`
-        console.log(err)
-      }
-    );
   }
+  // You need not initialize the state in a constructor lifecycle function, it can be more simply initialized within the class like below
+  // state = { lat: null, long: null, errorMessage: '' }
   componentDidMount() {
     // This lifecycle function will be automatically called once, when our component first gets rendered on to the screen
     // Perfect place to do some initial data loading! E.g., API calls to fetch data
@@ -70,6 +53,20 @@ class App extends Component {
     // Will get called every time the component gets updated
     // Good place to do more data loading when state changes, or our component gets updated props from its parent. E.g., we want to execute an API call every single time a user clicks on a button, or enters text to an input
     console.log('My component was just updated - it re-rendered!');
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // State can only be updated using the function 'setState'
+        // And we NEVER want to do a direct assignment to a state object, e.g., `this.state.lat = position.coords.latitude`, unless we are initializing the state inside the constructor function
+        this.setState({ lat: position.coords.latitude, long: position.coords.longitude });
+        console.log(position)
+        // Updating 'state' on a component causes the component to (almost) instantly rerender the component
+      },
+      (err) => {
+        this.setState({ errorMessage: err.message })
+        // Updating 'state' is an additive process, ^ won't affect `this.state.lon` or `this.state.lat`
+        console.log(err)
+      }
+    );
   }
   render() {
     // Conditional Rendering
