@@ -1,3 +1,4 @@
+import 'SeasonDisplay.css'
 import React from 'react';
 
 const getSeason = (lat, month) => {
@@ -29,13 +30,13 @@ const SeasonDisplay = (props) => {
   // Another example of JS Ternary Expression
   // ^ Refactored using design pattern above with seasonConfig object and ES6 Destructuring
   const { text, iconName } = seasonConfig[season]
-  // When referencing the keys of key-value pairs within an object with a VARIABLE (e.g., const/let) we have to use the syntax objectName[variableName], otherwise, if we know the key we are looking for we can simply do objectName.keyName
+  // When referencing the keys of key-value pairs within an object using a VARIABLE (e.g., const/let) we have to use the syntax objectName[variableName], otherwise, if we know the key we are looking for we can simply do objectName.keyName
   return (
-    <div>
-      <i className={`${iconName} icon`} />
+    <div className={`season-display ${season}`}>
+      <i className={`icon-left position massive ${iconName} icon`} />
       {/* ES6 Template Strings */}
       <h1>{text}</h1>
-      <i className={`${iconName} icon`} />
+      <i className={`icon-right position massive ${iconName} icon`} />
     </div>
   );
 }
