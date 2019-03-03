@@ -36,9 +36,9 @@ class App extends Component {
     // ^ Necessary, or else, you will get an error
     // This (below) is the only time we do a direct assignment to `this.state`, since we are initializing state here
     this.state = {
-      lat: null,
-      long: null,
-      errorMessage: ''
+      lat : null,
+      long : null,
+      errorMessage : ''
     }
   }
   // You need not initialize the state in a constructor lifecycle function, it can be more simply initialized within the class like below
