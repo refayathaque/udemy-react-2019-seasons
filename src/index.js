@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // ^ ES6 Destructuring
 import ReactDOM from 'react-dom';
+import SeasonDisplay from 'SeasonDisplay';
 
 // Functional Component
 // const App = () => {
@@ -43,16 +44,10 @@ class App extends Component {
   // You need not initialize the state in a constructor lifecycle function, it can be more simply initialized within the class like below
   // state = { lat: null, long: null, errorMessage: '' }
   componentDidMount() {
-    // This lifecycle function will be automatically called once, when our component first gets rendered on to the screen
+    // This lifecycle function will be automatically called once when our component first gets rendered on to the screen
     // Perfect place to do some initial data loading! E.g., API calls to fetch data
     // React Community Best-Practice and Official React Documentation advise against data loading in the constructor lifecycle function, they suggest that initial data loading happen here in the componentDidMount lifecycle method. This is recommended to ensure more clear code, e.g., a new developer will know that all API calls/data loading code are in this lifecycle function and won't have to look elsewhere
     console.log('My component was rendered to the screen');
-  }
-  componentDidUpdate() {
-    // This lifecycle function will be automatically called when the component updates itself and re-renders because we called `setState`
-    // Will get called every time the component gets updated
-    // Good place to do more data loading when state changes, or our component gets updated props from its parent. E.g., we want to execute an API call every single time a user clicks on a button, or enters text to an input
-    console.log('My component was just updated - it re-rendered!');
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         // State can only be updated using the function 'setState'
@@ -68,6 +63,12 @@ class App extends Component {
       }
     );
   }
+  componentDidUpdate() {
+    // This lifecycle function will be automatically called when the component updates itself and re-renders because we called `setState`
+    // Will get called every time the component gets updated
+    // Good place to do more data loading when state changes, or if our component gets updated props from the parent. E.g., we want to execute an API call every single time a user clicks on a button, or enters text to an input
+    console.log('My component was just updated - it re-rendered!');
+  }
   render() {
     // Conditional Rendering
     if (this.state.errorMessage && (!this.state.lat && !this.state.long)) {
@@ -79,12 +80,10 @@ class App extends Component {
     }
     if (!this.state.errorMessage && (this.state.lat && this.state.long)) {
       return(
-        <div>
-          Latitude: {this.state.lat}
-          <br />
-          Longtitude: {this.state.long}
-          <br />
-        </div>
+        <SeasonDisplay lat={this.state.lat} long={this.state.long}/>
+        // <div> Latitude: {this.state.lat} </div>
+        // Above, we are taking the local component state and passing it down as props to a child component
+        // When the local state updates, the child component will update itself as well (re-render), because its props have been updated
       );
     }
     return(
