@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // ^ ES6 Destructuring
 import ReactDOM from 'react-dom';
 import SeasonDisplay from 'SeasonDisplay';
+import Spinner from 'Spinner';
 
 // Functional Component
 // const App = () => {
@@ -88,7 +89,7 @@ class App extends Component {
     }
     return(
       <div>
-        Loading!
+        <Spinner message="Please allow us to know your location"/>
       </div>
     )
   }
