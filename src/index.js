@@ -42,8 +42,9 @@ class App extends Component {
       errorMessage : ''
     }
   }
-  // You need not initialize the state in a constructor lifecycle function, it can be more simply initialized within the class like below
+  // You need not initialize the state in a constructor lifecycle function, it can be more simply initialized within the class as an instance property like below
   // state = { lat: null, long: null, errorMessage: '' }
+  // This can be done because when Babel converts our code, it will take the state object and move it to a constructor lifecycle function anyways
   componentDidMount() {
     // This lifecycle function will be automatically called once when our component first gets rendered on to the screen
     // Perfect place to do some initial data loading! E.g., API calls to fetch data
@@ -51,7 +52,7 @@ class App extends Component {
     console.log('My component was rendered to the screen');
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
-        // State can only be updated using the function 'setState'
+        // State can ONLY be updated using the function 'setState'
         // And we NEVER want to do a direct assignment to a state object, e.g., `this.state.lat = position.coords.latitude`, unless we are initializing the state inside the constructor function
         this.setState({ lat: position.coords.latitude, long: position.coords.longitude });
         console.log(position)
@@ -59,7 +60,7 @@ class App extends Component {
       },
       (err) => {
         this.setState({ errorMessage: err.message })
-        // Updating 'state' is an additive process, ^ won't affect `this.state.lon` or `this.state.lat`
+        // Updating 'state' is an additive process, ^ won't affect other properties of state such as `this.state.lon` or `this.state.lat`
         console.log(err)
       }
     );
