@@ -89,7 +89,7 @@ class App extends Component {
     }
     return(
       <div>
-        <Spinner message="Please allow us to know your location"/>
+        <Spinner message="Please accept location request"/>
       </div>
     )
   }
