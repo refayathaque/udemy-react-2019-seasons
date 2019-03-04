@@ -70,26 +70,33 @@ class App extends Component {
     // Good place to do more data loading when state changes, or if our component gets updated props from the parent. E.g., we want to execute an API call every single time a user clicks on a button, or enters text to an input
     console.log('My component was just updated - it re-rendered!');
   }
-  render() {
+  renderContent() {
     // Conditional Rendering
     if (this.state.errorMessage && (!this.state.lat && !this.state.long)) {
-      return(
+      return (
         <div>
           Error: {this.state.errorMessage}
         </div>
       );
     }
     if (!this.state.errorMessage && (this.state.lat && this.state.long)) {
-      return(
+      return (
         <SeasonDisplay lat={this.state.lat} long={this.state.long}/>
-        // <div> Latitude: {this.state.lat} </div>
         // Above, we are taking the local component state and passing it down as props to a child component
         // When the local state updates, the child component will update itself as well (re-render), because its props have been updated
       );
     }
-    return(
+    return (
       <div>
         <Spinner message="Please accept location request"/>
+      </div>
+    )
+  }
+  render() {
+    // We always try, as much as possible, to not have multiple return statements inside of a render method
+    return (
+      <div className="wrapper">
+        {this.renderContent()}
       </div>
     )
   }

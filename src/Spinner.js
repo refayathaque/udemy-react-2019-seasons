@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Spinner = (props) => {
-  const { message = "Loading..." } = props
+const Spinner = ({ message = "Loading" }) => {
+  // ES6 Destructuring
   return (
     <div className="ui active dimmer">
       <div className="ui big text loader">
