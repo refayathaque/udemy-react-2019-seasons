@@ -89,7 +89,8 @@ class App extends Component {
     }
     return (
       <div>
-        <Spinner message="Please accept location request"/>
+        {/* <Spinner message="Please accept location request"/> */}
+        <Spinner />
       </div>
     )
   }
